@@ -1,0 +1,18 @@
+{
+  "name": "bd",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "bd.js",
+  "engines": {
+    "node": "18.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "tsnd server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
