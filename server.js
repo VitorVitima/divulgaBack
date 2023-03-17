@@ -7,6 +7,8 @@ import path from 'path'
 
 let data = new Date().getTime()
 
+const port = process.env.PORT || 3001
+
 const url = 'mongodb+srv://dados:ZeOWIzee7yBJOEp9@cluster0.f1egadi.mongodb.net/?retryWrites=true&w=majority'
 import mongoose from 'mongoose'
 
@@ -65,4 +67,4 @@ app.get('/getSQL', async (req, res)=>{
 const serverFun = () =>{
     console.log('server rodando')
 }
-app.listen(3001, serverFun)
+app.listen(port, serverFun)
