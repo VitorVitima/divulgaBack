@@ -29,7 +29,7 @@ const upload = multer({storage: storage})
 
 app.use(cors())
 app.use(Express.json())
-app.post('/register', upload.single('file'), (req, res)=>{
+app.post('/register', upload.single('file'), async (req, res)=>{
     const {nome} = req.body
     const {cep} = req.body
     const {telefone} = req.body
@@ -43,7 +43,7 @@ app.post('/register', upload.single('file'), (req, res)=>{
     //    console.log(ERRO)
     //})
 
-    const img2 =`${data}_${imgName.files[0].name}`
+    const img2 =`${data}_${imgName}`
     const obj = {
         nome:nome,
         cep: cep,
