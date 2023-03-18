@@ -19,7 +19,7 @@ import User from './user.js'
 
 const storage = multer.diskStorage({
     destination: (req, file, callback)=>{
-        callback(null, path.resolve('../public/imgs/'))
+        callback(null, path.resolve('./uploads/imgs/'))
     },
     filename: async (req, file, callback)=>{
         let nameImg2 = `${data}_${file.originalname}`
