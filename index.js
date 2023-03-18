@@ -51,7 +51,7 @@ app.post('/register', upload.single('file'), async (req, res)=>{
     //    console.log(ERRO)
     //})
     console.log(imgName)
-    const img2 =`${data}_${imgName}`
+    const img2 =`${data}_${imgName.files[0].name}`
     const obj = {
         nome:nome,
         cep: cep,
