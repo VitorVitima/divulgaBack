@@ -18,7 +18,7 @@ mongoose.connect(url).then(()=>console.log('Mongoose conectou'))
 
 const storage = multer.diskStorage({
     destination: (req, file, callback)=>{
-        callback(null, path.resolve('./uploads/imgs/'))
+        callback(null, path.resolve('../uploads/'))
     },
     filename: async (req, file, callback)=>{
         let nameImg2 = `${data}_${file.originalname}`
@@ -29,7 +29,7 @@ const upload = multer({storage: storage})
 
 app.use(cors())
 app.use(Express.json())
-app.post('/register', upload.single('file'), async (req, res)=>{
+app.post('/register', upload.single('file'), (req, res)=>{
     const {nome} = req.body
     const {cep} = req.body
     const {telefone} = req.body
