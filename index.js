@@ -4,7 +4,10 @@ import multer from 'multer'
 import cors from 'cors'
 import path from 'path'
 import mongoose from 'mongoose'
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = Express()
 const port = process.env.PORT || 3001
 
@@ -20,14 +23,19 @@ const storage = multer.diskStorage({
     destination: (req, file, callback)=>{
         callback(null, path.resolve('./imgs/'))
     },
-    filename: async (req, file, callback)=>{
+    filename: (req, file, callback)=>{
         let nameImg2 = `${data}_${file.originalname}`
         callback(null, nameImg2)
     }
 })
 const upload = multer({storage: storage})
-
-app.use(cors())
+app.use((req, res, next)=>{
+    res.header("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Headers", "X-PINGOTHER, Content-Type, Authorization")
+    app.use(cors())
+    next()
+})
+app.use('/file', Express.static(path.resolve(__dirname ,"imgs")))
 app.use(Express.json())
 app.post('/register', upload.single('file'), async (req, res)=>{
     const {nome} = req.body
@@ -53,8 +61,6 @@ app.post('/register', upload.single('file'), async (req, res)=>{
         categoria: categoria,
         img: img2
     }
-
-
     const newUser = User.create(obj)
     return res.json(newUser)
 })
