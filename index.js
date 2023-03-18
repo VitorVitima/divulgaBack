@@ -63,6 +63,10 @@ app.get('/getSQL', async (req, res)=>{
     const parceiros = await User.find()
     return res.json(parceiros)
 })
+app.get('/', (req, res)=>{
+    const mensagem = 'Hello World'
+    return res.json(mensagem)
+})
 
 const serverFun = () =>{
     console.log('server rodando')
