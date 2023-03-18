@@ -18,7 +18,7 @@ mongoose.connect(url).then(()=>console.log('Mongoose conectou'))
 
 const storage = multer.diskStorage({
     destination: (req, file, callback)=>{
-        callback(null, path.resolve('var/public/imgs/'))
+        callback(null, path.resolve('imgs'))
     },
     filename: async (req, file, callback)=>{
         let nameImg2 = `${data}_${file.originalname}`
