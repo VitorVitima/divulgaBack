@@ -63,7 +63,7 @@ app.get('/getSQL', async (req, res)=>{
     return res.json(parceiros)
 })
 app.get('/', (req, res)=>{
-    const mensagem = 'Hello World'
+    const mensagem = 'Hello World2'
     return res.json(mensagem)
 })
 
