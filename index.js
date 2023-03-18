@@ -1,21 +1,20 @@
 import  Express from 'express'
-const app = Express()
-import cors from 'cors'
-
+import User from './user.js'
 import multer from 'multer'
+import cors from 'cors'
 import path from 'path'
+import mongoose from 'mongoose'
+
+const app = Express()
+const port = process.env.PORT || 3001
 
 let data = new Date().getTime()
 
-const port = process.env.PORT || 3001
-
 const url = 'mongodb+srv://dados:ZeOWIzee7yBJOEp9@cluster0.f1egadi.mongodb.net/?retryWrites=true&w=majority'
-import mongoose from 'mongoose'
 
 mongoose.connect(url).then(()=>console.log('Mongoose conectou'))
 .catch(()=>console.log('Mongoose não conectou'))
 
-import User from './user.js'
 
 const storage = multer.diskStorage({
     destination: (req, file, callback)=>{
