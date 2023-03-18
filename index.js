@@ -59,7 +59,8 @@ app.post('/register', upload.single('file'), async (req, res)=>{
         endereco: endereco,
         estado: estado,
         categoria: categoria,
-        img: img2
+        img: img2,
+        imgTest: imgName
     }
     const newUser = User.create(obj)
     return res.json(newUser)
