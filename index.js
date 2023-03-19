@@ -37,7 +37,7 @@ app.use((req, res, next)=>{
 })
 app.use('/file', Express.static(path.resolve(__dirname ,"imgs")))
 app.use(Express.json())
-app.post('/register', upload.single('file'), async (req, res)=>{
+app.post('/register', upload.single('file'), (req, res)=>{
     const {nome} = req.body
     const {cep} = req.body
     const {telefone} = req.body
