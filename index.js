@@ -29,29 +29,27 @@ const storage = multer.diskStorage({
     }
 })
 const upload = multer({storage: storage})
-app.use((req, res, next)=>{
-    res.header("Access-Control-Allow-Origin", "*")
-    res.header("Access-Control-Allow-Headers", "X-PINGOTHER, Content-Type, Authorization")
-    app.use(cors())
-    next()
-})
-app.use('/file', Express.static(path.resolve(__dirname ,"imgs")))
+
+app.use(cors({
+    origin: 'https://divulga-fone.vercel.app/'
+}));
+app.use('/imgEs', Express.static(path.resolve(__dirname ,"imgs")))
 app.use(Express.json())
-app.post('/register', upload.single('file'), (req, res)=>{
-    const {nome} = req.body
+app.post('/register', upload.single('imgEs'), async (req, res)=>{
+    const {nome} = await req.body
     const {cep} = req.body
     const {telefone} = req.body
     const {endereco} = req.body
     const {estado} = req.body
     const {categoria} = req.body
-    const {imgName} = req.body
+    const {imgName} = await req.body
     //let nameImg2 = `${nameImg}${imgName}`
     //let SQL = "insert into parceiros (nome,cep,telefone,endereco,estado,categoria, img) values (?, ?, ?, ?, ?, ?, ?);"
     //db.query(SQL, [nome, cep, telefone, endereco, estado, categoria, nameImg2] ,(ERRO, result)=>{
     //    console.log(ERRO)
     //})
     console.log(imgName)
-    const img2 =`${data}_${imgName.files[0].name}`
+    const img2 =`${data}_${imgName}`
     const obj = {
         nome:nome,
         cep: cep,
@@ -59,8 +57,7 @@ app.post('/register', upload.single('file'), (req, res)=>{
         endereco: endereco,
         estado: estado,
         categoria: categoria,
-        img: img2,
-        imgTest: imgName
+        img: img2
     }
     const newUser = User.create(obj)
     return res.json(newUser)
