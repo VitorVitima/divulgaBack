@@ -63,6 +63,13 @@ app.post('/register', async (req, res)=>{
     const newUser = User.create(obj)
     return res.json(newUser)
 })
+app.get('/keys', (req, res)=>{
+    const chaves = [
+        {chave: "16032011"}
+    ]
+    const jsonContent = JSON.stringify(chaves);
+    res.end(jsonContent);
+})
 app.get('/getSQL', async (req, res)=>{
     const parceiros = await User.find()
     return res.json(parceiros)
