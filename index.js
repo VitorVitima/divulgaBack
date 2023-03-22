@@ -30,9 +30,7 @@ const storage = multer.diskStorage({
 })
 const upload = multer({storage: storage})
 
-app.use(cors({
-    origin: 'https://divulga-fone.vercel.app/'
-}));
+app.use(cors());
 app.use('/imgEs', Express.static(path.resolve(__dirname ,"imgs")))
 app.use(Express.json())
 app.post('/register', upload.single('imgEs'), async (req, res)=>{
