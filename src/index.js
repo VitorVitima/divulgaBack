@@ -21,7 +21,7 @@ mongoose.connect(url).then(()=>console.log('Mongoose conectou'))
 
 const storage = multer.diskStorage({
     destination: (req, file, callback)=>{
-        callback(null, path.resolve('./imgs/'))
+        callback(null, path.resolve('../imgs/'))
     },
     filename: (req, file, callback)=>{
         let nameImg2 = `${data}_${file.originalname}`
@@ -32,6 +32,14 @@ const upload = multer({storage: storage})
 app.use(cors());
 app.use('/imgEs', Express.static(path.resolve(__dirname ,"imgs")))
 app.use(Express.json())
+
+import aws from 'aws-sdk'
+aws.config.update({
+    accessKeyId: "",
+    secretAccessKey: "",
+    region: ""
+}) 
+
 app.post('/uploadImg', upload.single('image'), (req, res)=>{
     const mensagem = 'Foto arquivada'
     return res.json(mensagem)
