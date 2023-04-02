@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "./src/index.js",
+  "main": "./src/server.js",
   "engines": {
     "node": "18.x"
   },
   "scripts": {
-    "start": "node ./src/index.js",
+    "start": "node ./src/server.js",
     "build": "tsup src"
   },
   "keywords": [],
