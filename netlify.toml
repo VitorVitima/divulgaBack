@@ -1,4 +1,0 @@
-[[redirects]]
-from = "/*"
-to = "/dist/index.cjs"
-status = 200
