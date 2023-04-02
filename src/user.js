@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
         type: String,
     },
     img: {
-        type: Object,
+        type: String,
     }
 })
 
