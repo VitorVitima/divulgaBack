@@ -4,7 +4,6 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 
 const app = Express()
-const port = process.env.PORT || 3001
 
 const url = 'mongodb+srv://dados:ZeOWIzee7yBJOEp9@cluster0.f1egadi.mongodb.net/?retryWrites=true&w=majority'
 
@@ -22,11 +21,12 @@ app.post('/register', async (req, res)=>{
     const {estado} = req.body
     const {categoria} = req.body
     const {img} = req.body
-    //let nameImg2 = `${nameImg}${imgName}`
-    //let SQL = "insert into parceiros (nome,cep,telefone,endereco,estado,categoria, img) values (?, ?, ?, ?, ?, ?, ?);"
-    //db.query(SQL, [nome, cep, telefone, endereco, estado, categoria, nameImg2] ,(ERRO, result)=>{
-    //    console.log(ERRO)
-    //})
+    const parceiros = await User.find()
+    parceiros.map(e=>{
+      if(e.nome == nome){
+        return response.status(404)
+      }
+    })
     const obj = {
         nome:nome,
         cep: cep,
@@ -46,15 +46,18 @@ app.get('/keys', (req, res)=>{
     const jsonContent = JSON.stringify(chaves);
     res.end(jsonContent);
 })
-app.get('/getSQL', async (req, res)=>{
+app.get('/', async (req, res)=>{
     const parceiros = await User.find()
     return res.json(parceiros)
 })
-app.get('/', (req, res)=>{
-    const mensagem = 'Hello World2'
-    return res.json(mensagem)
+app.get('/:id', async (req, res)=>{
+    const parceiros = await User.find()
+    const obj = parceiros.filter(e=>e.categoria == req.params.id)
+    return res.json(obj)
 })
-const serverFun = () =>{
-    console.log('server rodando')
-}
-app.listen(port, serverFun)
+app.get('/focus/:id', async (req,res)=>{
+    const parceiros = await User.find()
+    const obj = parceiros.filter(e=>e.img.data.id == req.params.id)
+    return res.json(obj)
+})
+app.listen(4000)
